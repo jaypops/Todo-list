@@ -11,8 +11,8 @@ plus.addEventListener("submit", function (e) {
   if (TextFeild.value === "") {
     alert("Input a task");
   } else {
+    const inputValue = TextFeild.value.trim();
     const creatNewList = function () {
-      const inputValue = TextFeild.value.trim();
       const html = `
         <li class="list-of-items">
           <div class="items" id="hidden">
@@ -28,6 +28,7 @@ plus.addEventListener("submit", function (e) {
       textCopy.insertAdjacentHTML("afterbegin", html);
     };
     creatNewList();
+    TextFeild.value = "";
     textCopy.addEventListener("click", function (e) {
       e.preventDefault();
       const clicked = e.target.closest(".item");
@@ -36,9 +37,8 @@ plus.addEventListener("submit", function (e) {
         e.target.parentElement.parentElement.parentElement.remove();
       }
     });
-    itemList.push(creatNewList());
+    itemList.push(inputValue);
     localStorage.setItem("todos", JSON.stringify(itemList));
     console.log(localStorage.getItem("todos"));
-    TextFeild.value = "";
   }
 });
